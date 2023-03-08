@@ -4,8 +4,10 @@ import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/ico
 import type { MenuProps, MenuTheme } from 'antd';
 import { Menu, Switch } from 'antd';
 import { Button, Checkbox, Form, Input } from 'antd';
-import { Col, Row } from 'antd';
 import './App.css';
+import { Card, Col, Row } from 'antd';
+
+import { string } from 'mobx-state-tree/dist/internal';
 
 const onFinish = (values: any) => {
   console.log('Success:', values);
@@ -54,16 +56,24 @@ const items: MenuItem[] = [
     getItem('Option 12', '12'),
   ]),
 ];
+
 function App() {
   const [theme, setTheme] = useState<MenuTheme>('dark');
   const [current, setCurrent] = useState('1');
   const [nickname, setNickname] = useState('') 
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('')
-
-  const onFinish = (values: any) => {
-    console.log('Success:', nickname, username,password);
+  const [cards, setCards] = useState<{ 
+    nickname: string 
+    username: string 
+    password: string 
+  }[]>([]) 
+ 
+  const onFinish = (values: any) => { 
+    console.log("Success:", nickname, username, password); 
+    setCards([...cards, { nickname, username, password }]) 
   };
+ 
 
   const changeTheme = (value: boolean) => {
     setTheme(value ? 'dark' : 'light');
@@ -149,10 +159,20 @@ function App() {
 </div>
       <br />
       <br />
-      
+      {cards.map(card => ( 
+              <Card title="Titlu temporar" style={{ width: 300, marginTop: "20px" }}> 
+                <p>Nickname: {card.nickname}</p> 
+                <p>Username: {card.username}</p> 
+                <p>Password: {card.password}</p> 
+              </Card>  
+      ))}
+    
+
     
     </div>
   );
+  
 }
+
 
 export default App;
