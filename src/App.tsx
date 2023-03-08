@@ -160,7 +160,7 @@ function App() {
       <br />
       <br />
       {cards.map(card => ( 
-              <Card title="Titlu temporar" style={{ width: 300, marginTop: "20px" }}> 
+              <Card title="Titlu temporar" style={{ width: 300, marginTop: "1px", right: -1225 }}> 
                 <p>Nickname: {card.nickname}</p> 
                 <p>Username: {card.username}</p> 
                 <p>Password: {card.password}</p> 
